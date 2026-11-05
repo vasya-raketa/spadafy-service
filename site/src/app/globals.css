@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/fonts.css";
+
+/* Tailwind reads the same tokens, so utilities never introduce new values. */
+@theme inline {
+  --color-orange: var(--orange);
+  --color-pink: var(--pink);
+  --color-green: var(--green);
+  --color-orange-mist: var(--orange-mist);
+  --color-pink-mist: var(--pink-mist);
+  --color-mint-haze: var(--mint-haze);
+  --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-grey-100: var(--grey-100);
+  --color-grey-300: var(--grey-300);
+  --color-grey-500: var(--grey-500);
+  --color-grey-700: var(--grey-700);
+  --color-white: var(--white);
+
+  --spacing-1: var(--s-1);
+  --spacing-2: var(--s-2);
+  --spacing-3: var(--s-3);
+  --spacing-4: var(--s-4);
+  --spacing-5: var(--s-5);
+  --spacing-6: var(--s-6);
+
+  --font-display: var(--font-display);
+  --font-text: var(--font-text);
+  --radius-plate: var(--radius);
+  --ease-site: var(--ease);
+}
+
+/* ---------- Base ---------- */
+
+html {
+  background: var(--paper);
+  color: var(--charcoal);
+  font-family: var(--font-text);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-padding-top: calc(var(--nav-h) + var(--s-3));
+}
+
+body {
+  background: var(--paper);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--charcoal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+.skip-link {
+  position: fixed;
+  left: var(--margin);
+  top: var(--s-1);
+  z-index: 100;
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--radius-pill);
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: var(--t-small);
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ---------- Type: the only four sizes ---------- */
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  text-wrap: balance;
+}
+.t-title {
+  font-weight: 500;
+  font-size: var(--t-title);
+  line-height: var(--lh-title);
+  letter-spacing: var(--tr-title);
+  text-wrap: balance;
+}
+.t-body {
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+.t-small {
+  font-weight: 500;
+  font-size: var(--t-small);
+  line-height: var(--lh-small);
+  letter-spacing: var(--tr-small);
+}
+
+/* Muted text on light surfaces; ink on loud plates (see contrast rules). */
+.muted {
+  color: var(--grey-700);
+}
+:where(.plate--orange, .plate--pink) .muted {
+  color: var(--ink);
+}
+
+/* ---------- Grid, screens, plates ---------- */
+
+.page {
+  display: grid;
+  gap: var(--seam);
+  padding-inline: var(--margin);
+  padding-bottom: var(--seam);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--seam);
+}
+
+.screen {
+  /* A screen is a set of plates on the page grid. It adds no space of its own. */
+  scroll-margin-top: calc(var(--nav-h) + var(--s-3));
+}
+
+.plate {
+  position: relative;
+  border-radius: var(--radius);
+  padding: var(--plate-pad);
+  overflow: hidden;
+  isolation: isolate;
+}
+.plate--flush {
+  padding: 0;
+}
+
+.plate--orange { background: var(--orange); color: var(--charcoal); }
+.plate--pink { background: var(--pink); color: var(--charcoal); }
+.plate--green { background: var(--green); color: var(--charcoal); }
+.plate--orange-mist { background: var(--orange-mist); color: var(--charcoal); }
+.plate--pink-mist { background: var(--pink-mist); color: var(--charcoal); }
+.plate--mint-haze { background: var(--mint-haze); color: var(--charcoal); }
+.plate--grey { background: var(--grey-100); color: var(--charcoal); }
+.plate--charcoal { background: var(--charcoal); color: var(--white); }
+
+/* Body copy on loud plates is ink, never charcoal (AA). */
+:where(.plate--orange, .plate--pink) .t-body,
+:where(.plate--orange, .plate--pink) .t-small {
+  color: var(--ink);
+}
+
+/* An image slot that has no photo yet: labelled, at its real crop. */
+.placeholder {
+  display: grid;
+  place-content: center;
+  gap: var(--s-1);
+  background: var(--grey-100);
+  color: var(--grey-700);
+  text-align: center;
+  padding: var(--s-3);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  flex: none;
+  height: var(--control-h);
+  padding-inline: var(--s-3);
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: var(--t-body);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn--orange { background: var(--orange); color: var(--ink); }
+.btn--orange:hover { background: var(--charcoal); color: var(--white); }
+.btn--charcoal { background: var(--charcoal); color: var(--white); }
+.btn--charcoal:hover { background: var(--ink); }
+.btn--outline { box-shadow: inset 0 0 0 1px var(--charcoal); color: var(--charcoal); }
+.btn--outline:hover { background: var(--charcoal); color: var(--white); }
+:where(.plate--orange, .plate--pink) .btn--outline { box-shadow: inset 0 0 0 1px var(--ink); color: var(--ink); }
+:where(.plate--orange, .plate--pink) .btn--outline:hover { background: var(--ink); color: var(--white); }
+.plate--charcoal .btn--outline { box-shadow: inset 0 0 0 1px var(--white); color: var(--white); }
+
+.arrow {
+  display: inline-block;
+  transition: transform var(--dur-1) var(--ease);
+}
+:where(a, button):is(:hover, :focus-visible) .arrow {
+  transform: translateX(var(--s-1));
+}
+
+/* ---------- Motion: rise (the one entrance mechanic) ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-rise] {
+    opacity: 0;
+    transform: translateY(var(--rise-distance));
+  }
+  .js [data-rise].is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-2) var(--ease),
+      transform var(--dur-2) var(--ease);
+    transition-delay: calc(var(--rise-i, 0) * var(--rise-stagger));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow { transition: none; }
+}

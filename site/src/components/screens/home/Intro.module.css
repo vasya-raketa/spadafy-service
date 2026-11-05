@@ -1,0 +1,19 @@
+.plate {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.lower {
+  margin-top: var(--s-3);
+  align-items: start;
+}
+
+.body {
+  grid-column: span 6 / span 6;
+}
+
+.supporting {
+  grid-column: 8 / span 5;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--charcoal);
+}

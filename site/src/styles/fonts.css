@@ -1,0 +1,45 @@
+/*
+  Self-hosted from /src (converted to woff2). Review Condensed is the trial cut for the
+  design phase; drop the licensed files in with the same names for production.
+  Only the weights the system uses are declared: Review Bold, Aeonik Regular + Medium.
+*/
+@font-face {
+  font-family: "Review Condensed";
+  src: url("/fonts/ReviewCondensed-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aeonik Pro";
+  src: url("/fonts/AeonikPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aeonik Pro";
+  src: url("/fonts/AeonikPro-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallbacks so the swap does not move the layout. */
+@font-face {
+  font-family: "Review Condensed Fallback";
+  src: local("Arial Narrow Bold"), local("ArialNarrow-Bold"), local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 700;
+  size-adjust: 92.4%; /* measured: Review Condensed Bold vs the fallback, same string */
+  ascent-override: 81.4%;
+  descent-override: 18.6%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Aeonik Pro Fallback";
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 101.3%; /* measured: Aeonik Pro Regular vs Arial, same string */
+  ascent-override: 94%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+}

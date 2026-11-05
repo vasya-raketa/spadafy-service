@@ -1,0 +1,145 @@
+.header {
+  position: sticky;
+  top: var(--s-1);
+  z-index: 50;
+  padding-inline: var(--margin);
+  margin-top: var(--s-1);
+  margin-bottom: var(--seam);
+}
+
+.bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  height: var(--nav-h);
+}
+
+/* Brand colour in the nav (CLIENT_FEEDBACK #8): an orange pill with ink text (5.7:1). */
+.pill {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background: var(--orange);
+  color: var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-inline: var(--s-3) var(--s-2);
+  border-radius: var(--radius-pill);
+}
+
+.links {
+  display: flex;
+  height: 100%;
+}
+
+.link,
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  height: 100%;
+  padding-inline: var(--s-2);
+  font-size: var(--t-body);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.link:hover,
+.menuButton:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.menuButton {
+  padding-inline: var(--s-2) var(--s-3);
+}
+
+.menuIcon {
+  display: grid;
+  gap: 4px;
+  width: 16px;
+}
+.menuIcon span {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  transition: transform var(--dur-1) var(--ease);
+}
+.menuIcon[data-open] span:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+.menuIcon[data-open] span:last-child {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+/* ---------- Expanded menu: a full orange plate with large type ---------- */
+
+.menu {
+  position: fixed;
+  inset: var(--s-1);
+  z-index: 1;
+  background: var(--orange);
+  color: var(--charcoal);
+  border-radius: var(--radius);
+  padding: calc(var(--nav-h) + var(--s-1) + var(--s-5)) calc(var(--margin) - var(--s-1) + var(--plate-pad)) var(--plate-pad);
+  overflow-y: auto;
+}
+.menu:not([hidden]) {
+  animation: menu-in var(--dur-1) var(--ease);
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--s-2) * -1));
+  }
+}
+
+.menuGrid {
+  align-items: start;
+}
+
+.menuPrimary {
+  grid-column: span 7 / span 7;
+}
+.menuBig {
+  display: inline-block;
+}
+.menuBig:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.08em;
+}
+
+.menuServices {
+  grid-column: span 5 / span 5;
+  display: grid;
+  gap: var(--s-3);
+  color: var(--ink);
+}
+.menuServices ul {
+  display: grid;
+  gap: var(--s-2);
+}
+.menuService:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu:not([hidden]) {
+    animation: none;
+  }
+  .menuIcon span {
+    transition: none;
+  }
+}

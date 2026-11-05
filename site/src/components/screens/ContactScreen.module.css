@@ -1,0 +1,19 @@
+.plate {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.row {
+  align-items: end;
+}
+
+.body {
+  grid-column: span 7 / span 7;
+  color: var(--ink);
+}
+
+.cta {
+  grid-column: span 5 / span 5;
+  display: flex;
+  justify-content: flex-end;
+}

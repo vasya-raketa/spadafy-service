@@ -1,0 +1,170 @@
+/* The stage fills its grid slot; the plate around it does the cropping. */
+.console-slot {
+  position: absolute;
+  inset: 0;
+}
+
+/* Spadafy look for the stage: every colour is a site token, and depth comes from
+   hairlines and z-order instead of shadows (DESIGN_REQUIREMENTS §5: no drop shadows). */
+.look-spadafy .ss-stage {
+  --ss-canvas: var(--grey-100);
+  --ss-surface: var(--paper);
+  --ss-chrome: var(--paper);
+  --ss-raised: var(--paper);
+  --ss-well: transparent;
+  --ss-fill: var(--grey-100);
+  --ss-ink-1: var(--grey-100);
+  --ss-ink-2: var(--grey-100);
+  --ss-ink-3: var(--grey-300);
+  --ss-ink-4: var(--grey-300);
+  --ss-ink-5: var(--grey-500);
+  --ss-line: var(--grey-300);
+  --ss-line-faint: var(--grey-100);
+  --ss-text: var(--grey-700);
+  --ss-text-strong: var(--charcoal);
+  --ss-text-faint: var(--grey-700);
+  --ss-icon: var(--grey-500);
+  --ss-icon-faint: var(--grey-300);
+  --ss-accent: var(--charcoal);
+  --ss-accent-soft: var(--grey-100);
+  --ss-accent-text: var(--charcoal);
+  --ss-success: var(--green);
+  --ss-success-soft: var(--mint-haze);
+  --ss-success-text: var(--charcoal);
+  --ss-warning: var(--orange);
+  --ss-warning-soft: var(--orange);
+  --ss-warning-text: var(--ink);
+  --ss-font: var(--font-text);
+  --ss-radius-window: var(--radius);
+  --ss-shadow-window: 0 0 0 1px var(--charcoal);
+  --ss-shadow-hero: 0 0 0 1px var(--charcoal);
+  --ss-shadow-satellite: 0 0 0 1px var(--charcoal);
+  --ss-shadow-ground: 0 0 0 1px var(--charcoal);
+  --ss-shadow-float: 0 0 0 1px var(--charcoal);
+  --ss-shadow-card: 0 0 0 1px var(--charcoal);
+  --ss-shadow-lift: 0 0 0 1px var(--charcoal);
+  background: transparent;
+}
+
+.console-window {
+  box-shadow: 0 0 0 1px var(--charcoal);
+}
+
+.console-side {
+  display: grid;
+  gap: 4px;
+  padding: 8px 12px;
+}
+.console-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 28px;
+  padding-inline: 8px;
+  border-radius: var(--ss-radius-sm);
+}
+.console-nav[data-on] {
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--grey-300);
+}
+
+.console-table {
+  padding: 8px 16px 0;
+  font-size: 13px;
+  color: var(--ss-text-strong);
+}
+
+.console-head,
+.console-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px 96px 112px;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.console-head {
+  height: 32px;
+  font-size: 12px;
+  color: var(--ss-text);
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.console-row {
+  height: 56px;
+  border-bottom: 1px solid var(--ss-line-faint);
+}
+
+.console-name {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.console-name__title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.console-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The satellite: a Spadafy health check card straddling the window's sidebar. */
+.console-sat {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-1) var(--ease),
+    transform var(--dur-2) var(--ease);
+}
+.console-sat[data-show] {
+  opacity: 1;
+  transform: none;
+}
+.console-sat .ss-card {
+  box-shadow: 0 0 0 1px var(--charcoal);
+  background: var(--paper);
+  border-radius: 12px;
+}
+
+.console-sat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.console-strong {
+  font-weight: 500;
+  color: var(--ss-text-strong);
+}
+.console-finding {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ss-text-strong);
+}
+.console-checks {
+  display: grid;
+  gap: 10px;
+}
+.console-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 18px;
+  font-size: 13px;
+}
+.console-check .ss-check[data-on] {
+  --ss-accent: var(--green);
+}
+.console-fix {
+  color: var(--ss-text-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .console-sat {
+    transition: none;
+  }
+}

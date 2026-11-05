@@ -1,0 +1,35 @@
+/* About one viewport: nav row and seams above, one seam below so the intro peeks in. */
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  height: calc(100svh - var(--nav-h) - var(--s-1) * 4);
+  min-height: 640px;
+  padding-bottom: 0;
+}
+
+.row {
+  align-items: end;
+}
+
+.platforms {
+  grid-column: span 8 / span 8;
+  display: grid;
+  gap: var(--s-1);
+}
+
+.ctas {
+  grid-column: span 4 / span 4;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-1);
+}
+
+/* The console runs edge to edge across the plate and off its bottom; the plate's
+   radius and overflow do the crop. */
+.visual {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-inline: calc(var(--plate-pad) * -1);
+}

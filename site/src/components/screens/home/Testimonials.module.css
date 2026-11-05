@@ -1,0 +1,10 @@
+.quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.quote blockquote {
+  text-wrap: pretty;
+}

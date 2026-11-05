@@ -1,0 +1,37 @@
+.side {
+  grid-column: span 6 / span 6;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: var(--seam);
+}
+
+.headline {
+  display: flex;
+  align-items: flex-end;
+}
+
+.tech {
+  display: grid;
+  gap: var(--s-1);
+}
+
+.stats {
+  grid-column: span 6 / span 6;
+  display: grid;
+  gap: var(--seam);
+}
+
+/* Value first visually, label beside it; dt stays first in the DOM for screen readers. */
+.stat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--s-3);
+  padding-block: var(--s-3);
+}
+.stat dt {
+  order: 2;
+}
+.stat dd {
+  order: 1;
+}

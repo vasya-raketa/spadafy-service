@@ -1,0 +1,10 @@
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.media {
+  min-height: 100%;
+}

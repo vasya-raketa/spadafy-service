@@ -1,0 +1,76 @@
+/*
+  Spadafy tokens. Every colour, size, gap and duration on the site comes from here.
+  Source: DESIGN_REQUIREMENTS.md §5 (palette) and DESIGN_BRIEF.md §3.
+  Desktop only for now: mobile overrides --cols, --margin, --plate-pad and the type clamps.
+*/
+:root {
+  /* Brand: loud */
+  --orange: #ff521d;
+  --pink: #fc029c;
+  --green: #0ab574;
+
+  /* Brand: mist */
+  --orange-mist: #f4e8e8;
+  --pink-mist: #f5dfef;
+  --mint-haze: #e4f5df;
+
+  /* Primary */
+  --charcoal: #2f2f2f;
+  --ink: #141414;
+
+  /* Neutrals */
+  --paper: #faf8f6;
+  --grey-100: #edebe8;
+  --grey-300: #cfcbc6;
+  --grey-500: #8c8781;
+  --grey-700: #5e5a55;
+  --white: #ffffff;
+
+  /* Type: four sizes */
+  --font-display: "Review Condensed", "Review Condensed Fallback", "Arial Narrow", sans-serif;
+  --font-text: "Aeonik Pro", "Aeonik Pro Fallback", system-ui, -apple-system, sans-serif;
+
+  --t-display: clamp(7.5rem, 1.6rem + 7.4vw, 10rem);
+  --t-title: clamp(1.75rem, 0.75rem + 1.4vw, 2.25rem);
+  --t-body: clamp(1.0625rem, 0.9rem + 0.25vw, 1.125rem);
+  --t-small: 0.8125rem;
+
+  --lh-display: 0.92;
+  --lh-title: 1.15;
+  --lh-body: 1.55;
+  --lh-small: 1.4;
+  --tr-display: -0.01em;
+  --tr-title: -0.005em;
+  --tr-small: 0.01em;
+  --measure: 62ch;
+
+  /* Spacing: six values */
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 48px;
+  --s-5: 96px;
+  --s-6: 160px;
+
+  /* Grid */
+  --cols: 12;
+  --gutter: var(--s-1);
+  --margin: var(--s-3);
+  --seam: var(--s-1);
+  --plate-pad: var(--s-4);
+
+  /* Shape */
+  --radius: 16px;
+  --radius-pill: 999px;
+
+  /* Components */
+  --control-h: 48px;
+  --nav-h: var(--control-h);
+
+  /* Motion: one curve, two durations */
+  --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --dur-1: 300ms;
+  --dur-2: 800ms;
+  --rise-distance: 24px;
+  --rise-stagger: 80ms;
+}

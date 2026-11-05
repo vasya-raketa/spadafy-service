@@ -1,0 +1,34 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+
+.more {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--control-h);
+  height: var(--control-h);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.card:hover h3,
+.card:focus-visible h3 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+/* On the charcoal emphasis plate, muted copy steps up to white (13.4:1). */
+:global(.plate--charcoal).card :global(.muted) {
+  color: var(--white);
+}
