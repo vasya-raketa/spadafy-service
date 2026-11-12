@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
+import { serviceIcons } from "@/components/ui/ServiceIcon";
 import { hero } from "@/content/home";
 import { healthCheck, serviceHref, services } from "@/content/services";
 import styles from "./Nav.module.css";
 
+// No /services hub: "Services" opens a list of all seven service pages.
 const primary = [
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -17,6 +19,29 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const header = useRef<HTMLElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesItem = useRef<HTMLLIElement>(null);
+  const pathname = usePathname();
+
+  // The Services list closes on navigation, Esc and any click outside it.
+  useEffect(() => setServicesOpen(false), [pathname]);
+  useEffect(() => {
+    if (!servicesOpen) return;
+    const onDown = (e: PointerEvent) => {
+      if (!servicesItem.current?.contains(e.target as Node)) setServicesOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setServicesOpen(false);
+      servicesItem.current?.querySelector("button")?.focus();
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [servicesOpen]);
 
   const close = useCallback(() => {
     setOpen(false);
@@ -61,6 +86,34 @@ export function Nav() {
             <Logo height={24} />
           </Link>
           <ul className={styles.links}>
+            <li ref={servicesItem} className={styles.servicesItem}>
+              <button
+                type="button"
+                className={styles.link}
+                aria-expanded={servicesOpen}
+                aria-controls="services-list"
+                onClick={() => setServicesOpen((o) => !o)}
+              >
+                Services
+                <svg className={styles.caret} data-open={servicesOpen || undefined} width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M2 4.5 6 8l4-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+              </button>
+              <ul id="services-list" className={styles.servicesList} hidden={!servicesOpen}>
+                {services.map((s) => {
+                  const Icon = serviceIcons[s.slug];
+                  const current = pathname === serviceHref(s);
+                  return (
+                    <li key={s.slug}>
+                      <Link href={serviceHref(s)} className={styles.serviceLink} aria-current={current ? "page" : undefined}>
+                        {Icon && <Icon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />}
+                        {s.title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
             {primary.map((l) => (
               <li key={l.label}>
                 <Link href={l.href} className={styles.link} onClick={() => setOpen(false)}>

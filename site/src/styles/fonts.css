@@ -1,12 +1,20 @@
 /*
   Self-hosted from /src (converted to woff2). Review Condensed is the trial cut for the
   design phase; drop the licensed files in with the same names for production.
-  Only the weights the system uses are declared: Review Bold, Aeonik Regular + Medium.
+  Only the weights the system uses are declared: Review Bold (home), Review Medium
+  (service pages), Aeonik Regular + Medium.
 */
 @font-face {
   font-family: "Review Condensed";
   src: url("/fonts/ReviewCondensed-Bold.woff2") format("woff2");
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Review Condensed";
+  src: url("/fonts/ReviewCondensed-Medium.woff2") format("woff2");
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
