@@ -1,0 +1,80 @@
+/*
+  Service pages: grayscale structural prototype (SERVICE_PAGES_BRIEF.md §3).
+  Applies only while a service page is mounted (main[data-theme="gray"]), so the
+  homepage keeps its brand palette. Components on service pages use the role tokens;
+  the brand tokens are remapped to greys so the shared nav and footer follow along.
+  To bring the brand back, point the roles at brand colours and drop the remap.
+*/
+:root:has(main[data-theme="gray"]) {
+  /* Scale */
+  --white: #ffffff;
+  --grey-50: #f7f7f7;
+  --grey-150: #ededed; /* brief's grey-100; renamed so it doesn't collide with the brand neutral */
+  --grey-200: #dcdcdc;
+  --grey-400: #a3a3a3;
+  --grey-600: #6b6b6b;
+  --grey-800: #2e2e2e;
+  --black: #0f0f0f;
+
+  /* Roles: AA checked in the brief (muted 4.55:1 at worst, on surface-sunk) */
+  --surface: var(--white);
+  --surface-alt: var(--grey-50);
+  --surface-sunk: var(--grey-150);
+  --surface-inverse: var(--black);
+  --line: var(--grey-200);
+  --text: var(--grey-800);
+  --text-muted: var(--grey-600);
+  --text-inverse: var(--white);
+  --text-inverse-muted: var(--grey-400);
+  --icon: var(--grey-600);
+  --action: var(--black);
+  --focus: var(--black);
+  --canvas: var(--black); /* behind the blocks (v3: blocks on a dark canvas) */
+  --media: var(--grey-600); /* photo placeholders that carry white text (5.3:1) */
+
+  /* Brand remap for shared components (nav, footer, buttons) */
+  --orange: var(--grey-50);
+  --pink: var(--grey-150);
+  --green: var(--grey-150);
+  --orange-mist: var(--grey-50);
+  --pink-mist: var(--grey-50);
+  --mint-haze: var(--grey-50);
+  --charcoal: var(--grey-800);
+  --ink: var(--black);
+  --paper: var(--canvas);
+  --grey-100: var(--grey-150);
+  --grey-300: var(--grey-200);
+  --grey-500: var(--grey-400);
+  --grey-700: var(--grey-600);
+
+  /* Type: moderate display (56 / 64 / 72px at 1280 / 1440 / 1920), Review Medium */
+  --t-display: clamp(3.5rem, 2.17rem + 1.67vw, 4.5rem);
+  --t-title: clamp(1.5rem, 1.17rem + 0.42vw, 1.75rem);
+  --t-body: 1.0625rem;
+  --t-small: 0.8125rem;
+  --lh-display: 1;
+  --lh-title: 1.25;
+  --lh-body: 1.6;
+  --tr-small: 0.02em;
+  --w-display: 500;
+
+  /* Spacing: same six steps, s-5 raised 96 → 128 */
+  --s-5: 128px;
+
+  /* Blocks (prototype v3): 8px page margin, 8px between blocks, large radius.
+     --margin is the content edge inside a block, so the nav lines up with it. */
+  --block-gap: var(--s-1);
+  --plate-pad: var(--s-4);
+  --margin: calc(var(--block-gap) + var(--plate-pad));
+  --gutter: var(--s-3);
+  --radius-block: 48px;
+  --radius: 24px;
+}
+
+:root:has(main[data-theme="gray"]) footer.page {
+  padding-inline: var(--block-gap);
+  padding-bottom: var(--block-gap);
+}
+:root:has(main[data-theme="gray"]) footer.page .plate {
+  border-radius: var(--radius-block);
+}

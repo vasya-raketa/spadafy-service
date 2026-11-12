@@ -63,6 +63,53 @@
   padding-inline: var(--s-2) var(--s-3);
 }
 
+/* ---------- Services list (no hub page) ---------- */
+
+.servicesItem {
+  height: 100%;
+  position: relative;
+}
+
+.caret {
+  transition: transform var(--dur-1) var(--ease);
+}
+.caret[data-open] {
+  transform: rotate(180deg);
+}
+
+.servicesList {
+  position: absolute;
+  top: calc(100% + var(--s-1));
+  left: 0;
+  display: grid;
+  min-width: max-content;
+  padding: var(--s-1);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--charcoal);
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+.servicesList:not([hidden]) {
+  animation: menu-in var(--dur-1) var(--ease);
+}
+
+.serviceLink {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2);
+  border-radius: var(--s-1);
+  font-weight: 500;
+}
+.serviceLink:hover,
+.serviceLink[aria-current="page"] {
+  background: var(--grey-100);
+}
+.serviceLink svg {
+  flex: none;
+  color: var(--grey-700);
+}
+
 .menuIcon {
   display: grid;
   gap: 4px;
@@ -136,10 +183,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .servicesList:not([hidden]),
   .menu:not([hidden]) {
     animation: none;
   }
-  .menuIcon span {
+  .menuIcon span,
+  .caret {
     transition: none;
   }
 }

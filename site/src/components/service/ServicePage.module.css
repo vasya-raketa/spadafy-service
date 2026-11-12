@@ -1,0 +1,669 @@
+/*
+  Service page template on the prototype v3 block structure: rounded fill blocks on
+  a dark canvas, --block-gap (8px) around and between them, --radius-block corners,
+  --plate-pad inside. Role tokens only (styles/service-gray.css); every gap comes
+  from the six-step scale.
+*/
+
+.page {
+  --hero-top: calc(var(--nav-h) + var(--s-1) + var(--seam));
+  background: var(--canvas);
+  color: var(--text);
+}
+.page :global(.muted) {
+  color: var(--text-muted);
+}
+
+.icon {
+  flex: none;
+  color: var(--icon);
+}
+.iconSlot {
+  width: 24px;
+  height: 24px;
+}
+
+/* ---------- Blocks ---------- */
+
+.block {
+  border-radius: var(--radius-block);
+  padding: var(--plate-pad);
+  background: var(--surface);
+  color: var(--text);
+  scroll-margin-top: var(--hero-top);
+}
+.blockSoft {
+  background: var(--surface-alt);
+}
+.blockAccent {
+  background: var(--surface-sunk);
+}
+.blockInverse {
+  background: var(--grey-800);
+  color: var(--text-inverse);
+}
+.blockInverse :focus-visible {
+  outline-color: var(--text-inverse);
+}
+
+/* The body slides over the hero: its canvas covers the hero as it scrolls up. */
+.body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--block-gap);
+  margin-top: var(--block-gap);
+  padding-inline: var(--block-gap);
+  background: var(--canvas);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: sticky;
+  top: var(--hero-top);
+  z-index: 0;
+  height: calc(100vh - var(--hero-top) - var(--block-gap));
+  margin-inline: var(--block-gap);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--s-4);
+  padding: var(--plate-pad);
+  border-radius: var(--radius-block);
+  background: var(--media);
+  color: var(--text-inverse);
+}
+
+.heroMediaLabel {
+  justify-self: end;
+}
+
+.heroText {
+  align-self: end;
+  display: grid;
+  justify-items: start;
+  gap: var(--s-3);
+  max-width: calc(var(--measure) * 1.5);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+.eyebrow .icon {
+  color: inherit;
+}
+
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.hero :focus-visible {
+  outline-color: var(--text-inverse);
+}
+
+.heroLogos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--grey-400);
+}
+.heroLogos .textLogo {
+  color: var(--text-inverse);
+}
+
+/* Text logos: one consistent setting for every partner and platform name. */
+.textLogo {
+  font-weight: 500;
+  font-size: var(--t-title);
+  line-height: var(--lh-title);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* ---------- Split block (title + list) ---------- */
+
+.split,
+.row3,
+.ctaRow {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--block-gap);
+}
+
+.splitTitle {
+  grid-column: span 5;
+}
+
+.splitList {
+  grid-column: span 7;
+  display: grid;
+  align-content: start;
+  gap: var(--s-4);
+}
+
+.pressure {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: start;
+  max-width: calc(var(--measure) * 1.4);
+}
+
+/* ---------- Break (text on the canvas) ---------- */
+
+.break {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--s-3);
+  padding: var(--s-5) var(--plate-pad);
+  color: var(--text-inverse);
+}
+.break > * {
+  grid-column: 1 / span 8;
+}
+
+.breakLabel {
+  color: var(--text-inverse-muted);
+}
+
+/* ---------- Panel (text + media) ---------- */
+
+.panel {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  min-height: calc(var(--s-6) * 4);
+}
+
+.panelText {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+
+.panelList {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.panelItem {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+.rowText {
+  display: grid;
+  gap: var(--s-1);
+}
+
+.panelMedia {
+  grid-column: 7 / -1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--s-3);
+  border-radius: var(--radius);
+  background: var(--media);
+  color: var(--text-inverse);
+}
+
+.mediaLabel {
+  align-self: flex-end;
+}
+
+/* Pills on media: flat white, no glass. */
+.pills {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-1);
+}
+.pills li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: var(--s-1) var(--s-2);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---------- Row of three (title + options) ---------- */
+
+.rowTitle {
+  grid-column: span 4;
+}
+
+.option {
+  grid-column: span 4;
+  display: grid;
+  align-content: start;
+  gap: var(--s-3);
+  min-height: calc(var(--s-6) * 3);
+}
+
+.bullets {
+  display: grid;
+  gap: var(--s-1);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Cards block (head + card row) ---------- */
+
+.cardsBlock {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.cardsHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.cardsHead > p {
+  max-width: var(--measure);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: var(--block-gap);
+}
+
+.card {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+}
+
+.cardFoot {
+  display: grid;
+  gap: var(--s-2);
+}
+
+/* ---------- Examples (pager) ---------- */
+
+.examples {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.examplesTop {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-3);
+}
+
+.bars {
+  display: flex;
+  gap: var(--s-1);
+}
+
+/* 4px bar, 32px tall hit area */
+.bar {
+  width: var(--s-4);
+  height: var(--s-3);
+  padding-block: 14px;
+  background: var(--line);
+  background-clip: content-box;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.bar[aria-selected="true"] {
+  background-color: var(--text);
+}
+
+.exampleBody {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: end;
+}
+
+.exampleImage {
+  grid-column: span 5;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-size: var(--t-small);
+}
+
+.exampleText {
+  grid-column: 7 / -1;
+  display: grid;
+  gap: var(--s-2);
+}
+
+.pager {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-3);
+}
+.pager button {
+  font-size: var(--t-small);
+  font-weight: 500;
+  cursor: pointer;
+}
+.pager button:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Expect (checklist on the canvas) ---------- */
+
+.expect .checklist {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  margin-top: var(--s-3);
+}
+
+.checkRow {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--grey-800);
+}
+
+.iconInverse {
+  color: var(--text-inverse-muted);
+}
+
+/* ---------- FAQ / steps block (title left, list right) ---------- */
+
+.faqBlock {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+}
+.faqBlock > h2 {
+  grid-column: span 4;
+}
+
+.faqs,
+.steps {
+  grid-column: 6 / -1;
+}
+.faqs {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--line);
+  list-style: none;
+  cursor: pointer;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq > :not(summary) {
+  max-width: var(--measure);
+  padding-bottom: var(--s-3);
+}
+
+.plus {
+  position: relative;
+  flex: none;
+  width: var(--s-2);
+  height: var(--s-2);
+  color: var(--icon);
+}
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  inset: calc(50% - 0.75px) 0 auto;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform var(--dur-1) var(--ease);
+}
+.plus::after {
+  transform: rotate(90deg);
+}
+.faq[open] .plus::after {
+  transform: rotate(0deg);
+}
+
+.steps {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: var(--s-4) minmax(0, 1fr);
+  gap: var(--s-2);
+}
+
+/* ---------- Opening steps row (Health Check) ---------- */
+
+.stepsTitle {
+  grid-column: span 3;
+}
+
+.stepsList {
+  grid-column: span 6;
+  display: grid;
+  gap: var(--s-4);
+}
+
+/* ---------- CTA row ---------- */
+
+.ctaHead {
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.ctaHead > p:last-child {
+  color: var(--text-inverse-muted);
+}
+
+.ctaForm {
+  grid-column: span 5;
+}
+
+.ctaSend {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-4);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease);
+}
+.ctaSend:hover {
+  background: var(--grey-200);
+}
+.ctaSend.blockInverse:hover {
+  background: var(--media);
+}
+
+.ctaArrow {
+  align-self: flex-end;
+  transition: transform var(--dur-1) var(--ease);
+}
+.ctaSend:is(:hover, :focus-visible) .ctaArrow {
+  transform: translate(var(--s-1), calc(var(--s-1) * -1));
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.field {
+  display: grid;
+  gap: var(--s-1);
+}
+.field > span {
+  color: var(--text-muted);
+}
+.field :is(input, select, textarea) {
+  width: 100%;
+  min-height: var(--control-h);
+  padding: var(--s-1) 0;
+  border: 0;
+  border-bottom: 1px solid var(--text-muted);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+.field :is(input, select, textarea):focus-visible {
+  outline: none;
+  border-bottom-color: var(--text);
+  box-shadow: 0 1px 0 0 var(--text);
+}
+
+.fieldWide,
+.formStatus {
+  grid-column: 1 / -1;
+}
+
+.formStatus {
+  color: var(--text-muted);
+}
+
+/* ---------- Next service: the card stretches to the full block ---------- */
+
+.nextTrack {
+  height: 180vh;
+  margin-inline: calc(var(--block-gap) * -1);
+  view-timeline: --next block;
+}
+
+.nextStage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.nextCard {
+  position: absolute;
+  inset: var(--hero-top) var(--block-gap) var(--block-gap);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--s-2);
+  padding: var(--plate-pad);
+  color: var(--text-inverse);
+  text-align: center;
+  isolation: isolate;
+}
+.nextFill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--radius-block);
+  background: var(--media);
+}
+.nextCard:focus-visible {
+  outline-color: var(--text-inverse);
+}
+
+.nextTitle {
+  max-width: 12em;
+}
+.nextCard:hover .nextTitle {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+.nextMedia {
+  position: absolute;
+  top: var(--plate-pad);
+  right: var(--plate-pad);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .nextFill {
+      animation: next-stretch linear both;
+      animation-timeline: --next;
+      animation-range: contain 0% contain 70%;
+    }
+  }
+}
+@keyframes next-stretch {
+  from {
+    clip-path: inset(22% 36% round var(--radius-block));
+  }
+  to {
+    clip-path: inset(0 round var(--radius-block));
+  }
+}
+
+/* ---------- Placeholders ---------- */
+
+.ph {
+  display: block;
+  padding: var(--s-2);
+  border: 1px dashed var(--grey-400);
+  background: var(--surface-sunk);
+  color: var(--text-muted);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    position: relative;
+    top: 0;
+  }
+  .nextTrack {
+    height: auto;
+  }
+  .nextStage {
+    position: relative;
+    height: 100vh;
+  }
+  .plus::before,
+  .plus::after,
+  .ctaSend,
+  .ctaArrow {
+    transition: none;
+  }
+}

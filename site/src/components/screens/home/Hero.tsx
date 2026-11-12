@@ -24,7 +24,7 @@ export function Hero({ visual = "b" }: { visual?: HeroVisual }) {
           <ButtonLink href={serviceHref(healthCheck)} variant="charcoal" arrow>
             {hero.ctaHealthCheck}
           </ButtonLink>
-          <ButtonLink href="/services" variant="outline">
+          <ButtonLink href="/#services" variant="outline">
             {hero.ctaServices}
           </ButtonLink>
         </div>

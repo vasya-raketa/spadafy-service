@@ -1,11 +1,14 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 // One observer for the whole page: every [data-rise] element fades up once,
 // the first time 15% of it is in view. The CSS (globals.css) owns the motion and
-// skips it entirely under prefers-reduced-motion.
+// skips it entirely under prefers-reduced-motion. Re-runs on every route change,
+// since the observer lives in the root layout and outlives the page.
 export function RiseObserver() {
+  const pathname = usePathname();
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>("[data-rise]:not(.is-in)");
     const io = new IntersectionObserver(
@@ -20,6 +23,6 @@ export function RiseObserver() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
   return null;
 }
