@@ -3,6 +3,8 @@ import { Nav } from "@/components/nav/Nav";
 import { RiseObserver } from "@/components/motion/RiseObserver";
 import "./globals.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "Spadafy: Your first and last VDI partner",
   description:
@@ -13,8 +15,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/fonts/ReviewCondensed-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/AeonikPro-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${basePath}/fonts/ReviewCondensed-Bold.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${basePath}/fonts/AeonikPro-Regular.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         {/* Rise only hides content once JS is known to be running. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>

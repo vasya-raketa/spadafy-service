@@ -1,4 +1,4 @@
-import { Hero, type HeroVisual } from "@/components/screens/home/Hero";
+import { Hero } from "@/components/screens/home/Hero";
 import { Intro } from "@/components/screens/home/Intro";
 import { AllIn } from "@/components/screens/home/AllIn";
 import { Services } from "@/components/screens/home/Services";
@@ -12,13 +12,11 @@ import { Footer } from "@/components/Footer";
 // Hero → Intro → All in → Services → Green flags → Team → Testimonials → Contact.
 // Remove or reorder a line to change the page.
 // Compare hero visuals with /?hero=a (console) and /?hero=b (health check, default).
-export default async function Home({ searchParams }: { searchParams: Promise<{ hero?: string }> }) {
-  const { hero } = await searchParams;
-  const visual: HeroVisual = hero === "a" ? "a" : "b";
+export default function Home() {
   return (
     <>
       <main id="main" className="page" data-behind-menu>
-        <Hero visual={visual} />
+        <Hero />
         <Intro />
         <AllIn />
         <Services />

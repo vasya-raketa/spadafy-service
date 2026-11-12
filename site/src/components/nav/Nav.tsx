@@ -102,7 +102,7 @@ export function Nav() {
               <ul id="services-list" className={styles.servicesList} hidden={!servicesOpen}>
                 {services.map((s) => {
                   const Icon = serviceIcons[s.slug];
-                  const current = pathname === serviceHref(s);
+                  const current = pathname.replace(/\/$/, "") === serviceHref(s); // export adds a trailing slash
                   return (
                     <li key={s.slug}>
                       <Link href={serviceHref(s)} className={styles.serviceLink} aria-current={current ? "page" : undefined}>
