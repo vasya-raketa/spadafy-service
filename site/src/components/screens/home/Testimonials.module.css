@@ -1,10 +1,14 @@
+/* The plate spans 12 and carries its own 12-column inner grid: quote 7, attribution 4. */
 .quote {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--s-4);
+  align-items: end;
 }
 
-.quote blockquote {
+.text {
+  grid-column: span 7 / span 7;
+  max-width: var(--measure);
   text-wrap: pretty;
+}
+
+.by {
+  grid-column: 9 / span 4;
 }

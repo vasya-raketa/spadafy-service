@@ -1,0 +1,64 @@
+.wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.arrows {
+  display: flex;
+  gap: var(--s-1);
+  flex: none;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: var(--control-h);
+  height: var(--control-h);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+  color: var(--charcoal);
+  cursor: pointer;
+}
+.arrow:hover:not(:disabled) {
+  background: var(--charcoal);
+  color: var(--white);
+}
+.arrow:disabled {
+  box-shadow: inset 0 0 0 1px var(--grey-300);
+  color: var(--grey-500);
+  cursor: default;
+}
+
+/* Items span whole page columns; the list runs into the right margin so the
+   next item peeks in, and ends with the margin as trailing space. */
+.list {
+  --col: calc((100% - var(--margin) - (var(--cols) - 1) * var(--gutter)) / var(--cols));
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(var(--col) * var(--span) + var(--gutter) * (var(--span) - 1));
+  column-gap: var(--gutter);
+  margin-right: calc(var(--margin) * -1);
+  padding-right: var(--margin);
+  scroll-padding-right: var(--margin);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  display: grid;
+  scroll-snap-align: start;
+}

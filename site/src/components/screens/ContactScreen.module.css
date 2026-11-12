@@ -1,19 +1,13 @@
 .plate {
   display: grid;
-  gap: var(--s-4);
-}
-
-.row {
-  align-items: end;
+  justify-items: center;
+  gap: var(--s-3);
+  padding-block: var(--s-5);
+  text-align: center;
 }
 
 .body {
-  grid-column: span 7 / span 7;
+  max-width: 40ch;
+  margin-bottom: var(--s-3);
   color: var(--ink);
-}
-
-.cta {
-  grid-column: span 5 / span 5;
-  display: flex;
-  justify-content: flex-end;
 }

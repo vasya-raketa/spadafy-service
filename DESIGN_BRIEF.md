@@ -350,3 +350,172 @@ Not used: parallax, letter animation, scroll-jacking, cursor followers, loaders,
 ---
 
 **STOP: waiting for your approval** to start Phase 3. Checks in Phase 4 run at 1280 / 1440 / 1920 only.
+
+---
+
+# v2 changes (homepage, desktop)
+
+v1 is committed and tagged `v1` (repo now at the project root; `key.env` is git-ignored). **`refs 2/` is the primary direction for this pass**, with `refs/` secondary. There is no README in `refs 2/`.
+
+## What I take from refs 2
+
+| Ref | Take |
+|---|---|
+| Wise (`…0827`, `…0828`) | A **contained** column with wide outer margins; a short headline, one line of support, two CTAs, then one rounded media plate with air around it. Testimonial rail: headline + arrows on the left, cards peeking off the right edge. |
+| Sana (`…0893`, `…0895`, `…0896`) | **Calm product demo:** one dark/neutral stage, one centred object, chips, a 4-step progress row. Lots of air. Customer-story rail with visible overflow. |
+| Native (`…0830`) | A moderate headline size; a two-column "label left / text right" block under a hairline. |
+| Dayos (`…0897`, `…0898`) | Condensed caps at ~48–56px, a split plate (text / visual), carousel cards peeking at both edges. |
+| Staying online (`9`) | **Sticky stacking cards with numbered tabs that stay visible.** That's the pattern for the Health Check steps (Services page, later). |
+| "Power of being different" (`…0855`) | Line illustrations on loud plates: one stroke weight, charcoal on colour. That's the icon tone. |
+| Earn their name (`…0874`) | A centred statement with partner marks set *inline* in the type. Noted for later; not used (no partner logos supplied). |
+| Clarify (`35`), Osome (`4`), Produx (`37`), UN (`38`) | Hairline-ruled lists, generous vertical rhythm, one stat as a hero. |
+| Safford (`15`) | Duotone portraits in brand colours. For when team photos arrive (orange on pink-mist). |
+| AIR (`18`), Zipcio (`…0837`), Habitat (`…0850`), Eddie (`…0872`) | Air, a single focal object; not the dark grounds or giant service type (too dense for this audience). |
+
+## v2 tokens (replace §3.2–3.6; colours unchanged)
+
+**Type**: still 4 sizes, desktop only.
+
+| Token | v1 | **v2** (1280 / 1440 / 1920) |
+|---|---|---|
+| `display` | 120 / 132 / 160 | **`clamp(5.375rem, 2.6rem + 3.5vw, 6.5rem)` → 86 / 92 / 104px**, leading 0.95. Long headlines sit on 2–3 lines. |
+| `title` | 30 / 32 / 36 | **`clamp(1.5rem, 1rem + 0.7vw, 1.875rem)` → 25 / 26 / 29px**, leading 1.2 |
+| `body` | 17–18 | **17px**, leading **1.65**, measure **58ch** (was 62) |
+| `small` | 13 | **14px** |
+
+Display:body stays **≥ 5:1** at every width (86/17 = 5.06).
+
+**Spacing**: still 6 values, re-tuned to give more air.
+
+| Token | v1 | **v2** |
+|---|---|---|
+| scale | 8 / 16 / 24 / 48 / 96 / 160 | **8 / 16 / 32 / 64 / 96 / 160** |
+| seam (between plates and screens) | 8 | **16** |
+| gutter | 8 | **16** |
+| outer margin | 24 | **64** (a contained page, Wise/Sana-style) |
+| plate padding | 48 | **64** |
+| headline → body | 24 | **32** |
+| body → plates | 48 | **64** |
+
+There are still no gaps above 160px and no spacer sections. All the air sits inside and around real content.
+
+**Radius 16** is unchanged. **Motion:** one curve (`cubic-bezier(0.25, 0.8, 0.25, 1)`) and two durations (300 / 800ms), unchanged.
+
+## Fewer elements per screen
+
+| Screen | v1 | **v2** |
+|---|---|---|
+| H1 Hero | Headline + platforms + 2 CTAs + console | Same content with more air. Visual = **Hero B** by default (A behind a flag). |
+| H2 Intro | Eyebrow, display, body, supporting line | Same; display now 3 lines; body and supporting line in two 58ch columns |
+| H3 All in | Text 7 + photo 5 | **6 + 6**, headline 2 lines, more padding |
+| H4 Services | Headline + 7 cards in a 2/3/3 bento (busy) | Headline + arrows, then **a horizontal rail of 7 cards** (icon, title, text), 3 visible with the 4th peeking. Health Check stays the charcoal emphasis card. |
+| H5 Green flags | 7 plates (headline, tech, 5 stats) | **2 plates:** a green plate (headline + the tech line) and one mint plate with the 5 stats as a hairline-ruled list |
+| H6 Team | Headline + 6-up rail | Headline + arrows in one row, **4-up rail** (bigger photos), button |
+| H7 Testimonials | Headline + 3 cards | Pink headline plate, then **3 full-width quote rows** (quote 7 cols, attribution 4 cols): one quote per line of sight |
+| H8 Contact | Headline + body + button | **Centred**, the one centred moment on the page (Wise) |
+
+## Motion map v2 (one mechanic per section, never the same in neighbours)
+
+| Section | Mechanic | Reason |
+|---|---|---|
+| H1 Hero | **Hero loop** (stageshow) | The one continuous visual; shows what we do before any reading |
+| H2 Intro | **Rise** | Guides the eye headline → body as the voice moment arrives |
+| H3 All in | **None** | A calm beat after the intro; the photo plate does the work |
+| H4 Services | **Horizontal scroll** (arrows, `x proximity` snap, visible overflow) | Seven parallel options to browse, not a sequence; keeps the screen to one row |
+| H5 Green flags | **Rise** | The proof lands row by row, in reading order |
+| H6 Team | **Horizontal scroll** (arrows, no autoplay) | copy.md asks for a row to toggle left/right; 12 people is a set to browse |
+| H7 Testimonials | **Rise** | Three quotes read top to bottom; no extra mechanic needed |
+| H8 Contact | **None** | The final ask stays still and immediate |
+
+**Not used on the homepage, and why:**
+- **Page scroll-snap:** only the hero is full-height. Snapping between one full-height screen and content-sized ones makes the page jump, which reads as scroll-jacking.
+- **Sticky stacking:** the homepage has no real ordered sequence. It's reserved for the Health Check 01/02/03 steps on the Services page, as in ref `9`.
+
+**Reduced motion:** rise shows instantly, rails scroll without smoothing, the hero shows its poster frame.
+
+## Icons
+
+- **Library:** **Lucide** only. The kit already depends on it, so there's no second source.
+- **Style:** 24-grid icons drawn at **32px**, **stroke 1.5**, round caps and joins, charcoal (white on the charcoal plate).
+- **Placement:** each icon sits in a 64px circle with a 1px charcoal hairline (charcoal ≥ 3:1 on every surface it touches: mists 10.6+, orange 4.1, pink 3.6, green 5.0). Always next to the service name, never instead of it.
+
+| Service | Icon | Meaning |
+|---|---|---|
+| VDI Managed Services | `MonitorCog` | A desktop that's looked after |
+| Free VDI Health Check | `Activity` | A pulse reading: a health check |
+| VDI Infrastructure | `Server` | The platform underneath |
+| Healthcare SSO and Authentication | `Fingerprint` | Identity and sign-in |
+| IGEL Endpoint Solutions | `Computer` | A managed endpoint device |
+| Nerdio Solutions | `Workflow` | Automation: provisioning, images, autoscaling |
+| Hybrid Cloud & Infrastructure Modernization | `CloudCog` | Cloud plus on-prem, modernised |
+
+The same set later gives the Health Check steps their icons. I'll show the 7 on one sheet for approval before placing them.
+
+## Hero B (stageshow): storyboard
+
+**One object, one story: the Free Health Check running on an environment.** This is calmer than Hero A: no table, no sidebar, no second scene. It also ties the hero to the primary CTA.
+
+- **Ground and frame:** the orange hero plate. A single **orange-mist stage plate** runs off the bottom of the hero ("stage with gutters", ~15% side insets). On it sits **one paper card** (~560px wide, centred) with a charcoal hairline and no shadow.
+- **Card content** (real words only, all from copy.md Screen 7):
+  - title "Free VDI Health Check"
+  - four check rows: "Platform health", "Configuration", "Performance", "Capacity"
+  - a 4-dot progress row
+  - payoff chip: "Prioritized findings"
+
+**Loop (~12s, no cursor):**
+
+| t | Beat |
+|---|---|
+| 0.0 | Poster-able opening: the card with 4 rows, all pending (grey ring), progress 0/4 |
+| 1.0 | "Platform health" turns pending → ✓ (green fill); dot 1 fills |
+| 2.6 | "Configuration" ✓, dot 2 |
+| 4.2 | "Performance" ✓, dot 3 |
+| 5.8 | "Capacity" ✓, dot 4 |
+| 6.8 | The payoff chip "Prioritized findings" rises in under the rows (Collapse, arrives full) |
+| 6.8–9.0 | **Hold 2s** |
+| 9.0–9.6 | Reset in place: chip and checks clear in one quick reverse stagger (70ms), last change first. No data rewinds; the checks just restart, like a re-run. |
+| 10.0 | Next run begins |
+
+- **Poster** (reduced motion, thumbnails): all 4 ✓ + chip visible.
+- **Switch:** `<Hero visual="a" | "b">`, set from the URL: **`/?hero=a`** shows Hero A, default (and `?hero=b`) shows Hero B. Both stay in the codebase.
+- **Verification:** film the loop at 1280 / 1440 / 1920 and check the seam; contact sheets of A vs B side by side.
+
+## Deliverables for v2
+
+1. Icon sheet (7 icons), **for your approval** before placement
+2. v2 build
+3. Side-by-side full-page screenshots v1 | v2 at 1280 / 1440 / 1920, Hero A vs Hero B, in `screenshots/03-v2/`
+4. CLIENT_FEEDBACK and DESIGN_REQUIREMENTS checklists re-run
+
+## v2 as built (differences from the plan above)
+
+- **Measure:** set to `41ch`, not 58ch. In Aeonik, 1ch is the wide "0", so 58ch gave ~70 characters per line. 41ch measures ≈ 55–58 characters per line.
+- **Hero:** centred (Wise). Left-aligned, the 92px headline left a dead orange area on the right.
+- **Hero B:**
+  - The payoff "Prioritized findings" lands **on the progress dots** in the card header (the dots become the badge), so it's never cropped at 1280.
+  - Quiet filler rows run the card off the stage's bottom edge, so it never floats.
+  - The stage height tracks its slot. The loop is ~11s.
+- **Icons:** IGEL uses `Laptop` (approved swap; `Computer` read too close to `Server`).
+- **Testimonial quotes:** title size, 7 columns, one quote per row.
+
+## v2 checklists (re-run at 1280 / 1440 / 1920)
+
+**CLIENT_FEEDBACK.md**
+- [x] No empty dark space between sections; seams are 16px everywhere; no spacer sections
+- [x] Hero: central message, tech line and both CTAs above the fold at 1280/1440/1920 (375 out of scope: desktop only)
+- [x] Services reachable from hero, nav, menu and screen 4; every card links to `/services/[slug]` (pages not built yet)
+- [x] "Tech" appears nowhere as a label (text, alt, aria, title)
+- [x] Nav and menu use brand colour; the menu is a full orange plate
+- [ ] Doctor image: not on the homepage (it belongs to the Services page "Care" screen, not built yet)
+- [x] Homepage order: Hero → Intro → All in → Services → Green flags → Team → Testimonials → Contact
+- [ ] Services page order: not built yet (homepage-only scope)
+
+**DESIGN_REQUIREMENTS.md**
+- [x] 4 type sizes in use (14 / 17 / 26 / 92 at 1440); exactly one display headline per screen
+- [x] Plates on the 12-column grid; spacing only from 8/16/32/64/96/160
+- [x] One idea per screen, real copy, placeholders visible
+- [x] Motion: rise, horizontal scroll, the hero loop; one curve, two durations; transform/opacity only; reduced motion verified
+- [x] Flat plates; charcoal on 2 plates (Health Check card, footer); 0 AA failures across 17 text/ground pairs
+- [x] Checked at 1280, 1440, 1920; no horizontal page scroll; layout shift 0.0011; console clean
+
+Length: v2 is 6,791px at 1440 (v1 was 6,266px). The extra ~525px is the air asked for. No spacer bands were added.

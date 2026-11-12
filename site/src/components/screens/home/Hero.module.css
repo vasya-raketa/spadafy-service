@@ -3,25 +3,24 @@
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
-  height: calc(100svh - var(--nav-h) - var(--s-1) * 4);
-  min-height: 640px;
+  /* At least the viewport below the nav; grows if Hero B's card needs more. */
+  min-height: max(640px, calc(100svh - var(--nav-h) - var(--s-1) - var(--seam) * 2));
   padding-bottom: 0;
 }
 
-.row {
-  align-items: end;
+.plate {
+  align-items: center;
+  text-align: center;
 }
 
 .platforms {
-  grid-column: span 8 / span 8;
-  display: grid;
-  gap: var(--s-1);
+  max-width: 40ch;
+  margin-top: calc(var(--s-3) - var(--s-4));
 }
 
 .ctas {
-  grid-column: span 4 / span 4;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: var(--s-1);
 }
 
@@ -31,5 +30,10 @@
   position: relative;
   flex: 1;
   min-height: 0;
+  align-self: stretch;
   margin-inline: calc(var(--plate-pad) * -1);
+}
+/* Hero B's card needs its whole height in view so the payoff is never cropped. */
+.visual[data-visual="b"] {
+  min-height: 360px;
 }

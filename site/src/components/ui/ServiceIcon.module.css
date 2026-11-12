@@ -1,0 +1,12 @@
+/* A 64px hairline circle; colour follows the plate's text colour
+   (charcoal on light and loud plates, white on charcoal). */
+.ring {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--s-4);
+  height: var(--s-4);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px currentColor;
+  color: inherit;
+}
